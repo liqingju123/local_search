@@ -27,21 +27,25 @@ def show_like_doctor(condition):
 
 #插入数据
 def insert_doctor(name,phone,yiyuan_daming,yiyuan_xiaoming,keshi,shanchang):
-    conn.execute("INSERT INTO DOCTOR (%s) VALUES (NULL,'%s','%s','%s','%s','%s','%s')" % (table_items,name,phone,yiyuan_daming,yiyuan_xiaoming,keshi,shanchang))
-    conn.commit()
-    
+    try:
+        conn.execute("INSERT INTO DOCTOR (%s) VALUES (NULL,'%s','%s','%s','%s','%s','%s')" % (table_items,name,phone,yiyuan_daming,yiyuan_xiaoming,keshi,shanchang))
+        conn.commit()
+    except:
+        print '导入错误'
 # 插入   'name,phone,类型的数据'
 def insert_doctor_by_info(info):
     print info
-    sql ="INSERT INTO DOCTOR (%s) VALUES (NULL,'%s')" % (table_items,info.replace('__',"','"));
-    print sql
-    conn.execute(sql)
-    conn.commit()
+    try:
+        sql ="INSERT INTO DOCTOR (%s) VALUES (NULL,'%s')" % (table_items,info.replace('__',"','"));
+        print sql
+        conn.execute(sql)
+        conn.commit()
+    except:
+        print '导入错误'
     
     
 #删除
 def detele_doctor(id):
-#     print id
     sql ='delete from doctor where id =%s' % id;
     conn.execute(sql)
     conn.commit()
