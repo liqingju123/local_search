@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//UI/__init__.py=utf-8
+encoding//UI/db.py=utf-8
+encoding//UI/read_excel.py=utf-8
+encoding//UI/write_excel.py=utf-8
