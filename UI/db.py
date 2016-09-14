@@ -21,7 +21,7 @@ def show_like_doctor(condition):
         return show_all_doctor()
     else:   
         sql ='SELECT %s FROM DOCTOR  WHERE %s  order by ID LIMIT 0,50' % (table_items,condition);
-        print sql 
+#         print sql 
         cursor = conn.execute(sql)
         return cursor
 
@@ -29,26 +29,34 @@ def show_like_doctor(condition):
 def insert_doctor(name,phone,yiyuan_daming,yiyuan_xiaoming,keshi,shanchang):
     try:
         conn.execute("INSERT INTO DOCTOR (%s) VALUES (NULL,'%s','%s','%s','%s','%s','%s')" % (table_items,name,phone,yiyuan_daming,yiyuan_xiaoming,keshi,shanchang))
-        conn.commit()
     except:
         print '导入错误'
+    finally:
+        conn.commit()
+        
+        
 # 插入   'name,phone,类型的数据'
 def insert_doctor_by_info(info):
-    print info
+#     print info
     try:
         sql ="INSERT INTO DOCTOR (%s) VALUES (NULL,'%s')" % (table_items,info.replace('__',"','"));
-        print sql
+#         print sql
         conn.execute(sql)
-        conn.commit()
     except:
         print '导入错误'
+    finally:
+        conn.commit() 
     
     
 #删除
 def detele_doctor(id):
-    sql ='delete from doctor where id =%s' % id;
-    conn.execute(sql)
-    conn.commit()
+    try:
+        sql ='delete from doctor where id =%s' % id;
+        conn.execute(sql)
+    except:
+        print '删除错误'
+    finally:
+        conn.commit()
     
     
     
